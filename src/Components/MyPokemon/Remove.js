@@ -1,30 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaArrowLeft, FaTrash } from 'react-icons/fa'
+import { Link, useParams } from 'react-router-dom'
 import { useGlobalContext } from '../../Context'
-import { BoxDiv, BoxWrap } from '../Detail/BoxStyles'
-import { Button, Overlay } from '../Styles'
+import { Title } from '../Detail/DetailStyles'
+import { Button } from '../Styles'
+import { RemoveContent, RemoveWrap } from './RemoveStyles'
 
-function Remove(props) {
+function Remove() {
+    const {name} = useParams();
     const {removePokemon} = useGlobalContext()
+    const [pokemon, setPokemon] = useState(null)
+
+    useEffect(() =>{
+        let res = JSON.parse(localStorage.getItem("mypokemonlist"))
+        setPokemon(res.filter(item => item.name === name)[0])
+    },[name])
 
     return (
-        <Overlay>
-            { props.data && (
-                <BoxWrap style={{top:'0'}}>
-                <FaArrowLeft onClick={() => props.setRemove(false)}/>
-                { props.data[0].nickname.split(", ").map(item => 
-                    (<BoxDiv>
-                        <img src={props.data[0].sprites.front_default} alt={props.data[0].name} />
-                        <div>
-                            <p style={{fontWeight:"bold"}}>{props.data[0].name}</p>
-                            <p>{item}</p>
-                        </div>
-                        <Button><FaTrash onClick={() => removePokemon(item, props.data[0])}/></Button>
-                    </BoxDiv>)
-                )}
-                </BoxWrap>)
+        <>
+            { pokemon && (
+                <RemoveWrap style={{top:'0'}}>
+                    <Link to={`/my-pokemon`} style={{textDecoration:"none"}}>
+                        <FaArrowLeft style={{color:"#000"}}/>
+                    </Link>
+                    <Title>Release Pokemon</Title>
+                    { pokemon.nickname.split(", ").map((item, i) => 
+                        (<RemoveContent key={i}>
+                            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                            <div>
+                                <p style={{fontWeight:"bold"}}>{pokemon.name}</p>
+                                <p>{item}</p>
+                            </div>
+                            <Button><FaTrash onClick={() => removePokemon(item, pokemon)}/></Button>
+                        </RemoveContent>)
+                    )}
+                </RemoveWrap>)
             }
-        </Overlay>
+        </>
     )
 }
 

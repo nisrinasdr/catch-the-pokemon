@@ -125,7 +125,7 @@ const AppProvider = ({ children }) => {
         } else {
             saveToLocalStorage("mypokemonlist", real)
         }
-        window.location.reload();
+        navigate('/my-pokemon')
     }
 
     const saveToLocalStorage = (name, item) => {

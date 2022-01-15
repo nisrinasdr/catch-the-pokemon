@@ -8,6 +8,7 @@ import Home from './Components/Home';
 import Detail from './Components/Detail/Detail';
 import MyPokemon from './Components/MyPokemon/MyPokemon';
 import { AppProvider } from './Context';
+import Remove from "./Components/MyPokemon/Remove";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/:name' element={<Detail/>} exact />
           <Route path='/my-pokemon' element={<MyPokemon/>} exact />
+          <Route path='/delete/:name' element={<Remove/>} exact />
         </Routes >
         </AppProvider>
       </div>
