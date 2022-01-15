@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaEdit } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react/cjs/react.development'
 import Card from '../Card/Card'
 import { CardDiv, CardWrap } from '../Card/CardStyles'
 import { RoundButton } from '../Styles'
