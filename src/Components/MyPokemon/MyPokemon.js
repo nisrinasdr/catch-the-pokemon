@@ -20,16 +20,16 @@ function MyPokemon() {
               <p style={{padding:"1em"}}>You don't have any pokemon.</p>:(
               <CardWrap> 
               { pokemon.map((data, i) => 
+              <>
                 <CardDiv>
                   <Link to={`/${data.name}`} style={{textDecoration:"none"}}>
                   <Card key={i} name={data.name} pic={data.sprites.front_default} nickname={data.nickname} owned={data.owned}/>
                   </Link>
                   <RoundButton onClick={() => setRemove(true)}><FaEdit/></RoundButton>
                 </CardDiv>
+                { remove && (<Remove data={data} setRemove={setRemove}/>) }
+                </>
               )}
-              {
-              remove && (<Remove data={pokemon} setRemove={setRemove}/>)
-              }
               </CardWrap>)}  
         </>
     )
