@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../Context'
 import Card from './Card/Card'
 import { CardWrap } from './Card/CardStyles'
 import { Button, Pagination } from './Styles'
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
-import { useState } from 'react/cjs/react.development'
-
-
 
 function Home() {
     const {pokemon, loading, nextPage, previousPage, previous, next} = useGlobalContext()
